@@ -1,0 +1,29 @@
+/* src/index.css */
+@import "tailwindcss";
+
+.hero-gradient {
+  background: linear-gradient(135deg, #E67E22 0%, #2E86AB 100%);
+  position: relative;
+}
+
+.glass-card-strong {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+
+/* For the Floating Animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+.float-animation {
+  animation: float 4s ease-in-out infinite;
+}
+@custom-variant dark (&:where(.dark, .dark *));
