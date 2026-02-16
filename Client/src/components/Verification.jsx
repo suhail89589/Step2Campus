@@ -7,7 +7,6 @@ import {
   MailCheck,
   FileSearch,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom"; // SDE-2 Fix: Use navigate for state
 import { motion } from "framer-motion";
 
 const VERIFICATION_STEPS = [
@@ -32,17 +31,13 @@ const VERIFICATION_STEPS = [
 ];
 
 const VerificationSection = () => {
-  const navigate = useNavigate();
-
-  const handleMentorRedirect = () => {
-    // Pass state to Auth.jsx so it knows to show Mentor Signup
-    navigate("/auth", {
-      state: { initialRole: "MENTOR", initialIsLogin: false },
-    });
-  };
+  // Constants defined inside or outside; usually outside for static,
+  // but kept here for easy configuration.
+  const GOOGLE_FORM_URL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSfBD-IV0tTLxNfQEF1LnMJWM0nxup-qnLkFSR-fTwKwvZiLqw/viewform";
 
   return (
-    <section className="relative pt-24 pb-48 px-6 bg-[#FFFBF0] font-sans overflow-hidden z-0">
+    <section className="relative pt-24 pb-48 px-6 bg-[#FFFBF0] font-sans overflow-hidden">
       {/* Background Blobs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-[10%] -left-[10%] w-[50vw] h-[50vw] bg-orange-200/40 rounded-full blur-[100px] mix-blend-multiply opacity-70" />
@@ -106,16 +101,19 @@ const VerificationSection = () => {
             ))}
           </div>
 
-          <button
-            onClick={handleMentorRedirect}
-            className="mt-10 inline-flex items-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-xl font-bold hover:bg-orange-600 shadow-xl shadow-gray-900/10 hover:shadow-orange-500/20 transition-all duration-300 group active:scale-95"
+          {/* SDE Fix: Converted button to anchor for external link + Secure attributes */}
+          <a
+            href={GOOGLE_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-10 inline-flex items-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-xl font-bold hover:bg-orange-600 shadow-xl shadow-gray-900/10 hover:shadow-orange-500/20 transition-all duration-300 group active:scale-95 no-underline"
           >
             Apply to be a Mentor
             <ArrowRight
               size={20}
               className="group-hover:translate-x-1 transition-transform"
             />
-          </button>
+          </a>
         </motion.div>
 
         {/* Right Column Visuals */}
