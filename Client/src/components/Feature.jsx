@@ -7,6 +7,10 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 
+// --- Configuration ---
+const GOOGLE_FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSfBD-IV0tTLxNfQEF1LnMJWM0nxup-qnLkFSR-fTwKwvZiLqw/viewform";
+
 // --- Data ---
 const FEATURES = [
   {
@@ -58,20 +62,21 @@ const itemVariants = {
 };
 
 const FeaturesSection = () => {
+  // Handler for secure redirection
+  const handleStartJourney = () => {
+    window.open(GOOGLE_FORM_URL, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <div className="relative w-full font-sans overflow-hidden bg-[#FFFBF0] selection:bg-orange-200">
-      {/* =========================================
-          BACKGROUND LAYERS
-         ========================================= */}
+      {/* Background Layers */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-orange-200/40 rounded-full blur-[100px] mix-blend-multiply opacity-70" />
         <div className="absolute top-[40%] -left-[10%] w-[40vw] h-[40vw] bg-amber-100/60 rounded-full blur-[100px] mix-blend-multiply opacity-70" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
       </div>
 
-      {/* =========================================
-          SECTION 1: Why Step2Campus?
-         ========================================= */}
+      {/* SECTION 1: Why Step2Campus? */}
       <section className="py-24 px-6 md:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
@@ -137,12 +142,9 @@ const FeaturesSection = () => {
         </div>
       </section>
 
-      {/* =========================================
-          SECTION 2: How It Works (Timeline)
-         ========================================= */}
+      {/* SECTION 2: How It Works */}
       <section className="py-24 px-6 relative z-10 border-t border-orange-100/50">
         <div className="max-w-6xl mx-auto">
-          {/* Header - Centered for Symmetry */}
           <div className="text-center mb-20 max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight">
               From confused to{" "}
@@ -156,9 +158,7 @@ const FeaturesSection = () => {
             </p>
           </div>
 
-          {/* Timeline Grid */}
           <div className="relative grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-            {/* Connecting Line (Desktop) */}
             <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-orange-200 via-orange-400 to-orange-200 -z-0"></div>
 
             {STEPS.map((step, index) => (
@@ -170,12 +170,10 @@ const FeaturesSection = () => {
                 transition={{ delay: index * 0.2 }}
                 className="relative flex flex-col items-center text-center group z-10"
               >
-                {/* Step Number Circle */}
                 <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg shadow-orange-100 border-4 border-white mb-8 group-hover:border-orange-500 transition-colors duration-300 relative">
                   <span className="text-3xl font-black text-gray-300 group-hover:text-orange-500 transition-colors">
                     0{step.id}
                   </span>
-                  {/* Floating Icon Badge */}
                   {index === 2 && (
                     <div className="absolute -top-2 -right-2 bg-yellow-400 text-yellow-900 text-[10px] font-bold px-2 py-1 rounded-full animate-bounce shadow-sm">
                       Start!
@@ -193,9 +191,10 @@ const FeaturesSection = () => {
             ))}
           </div>
 
-          {/* Symmetrical Centered CTA Button */}
+          {/* CTA Button linked to Google Form */}
           <div className="flex justify-center mt-12">
             <motion.button
+              onClick={handleStartJourney}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gray-900 text-white rounded-full font-bold text-lg shadow-xl shadow-gray-900/20 hover:bg-orange-600 hover:shadow-orange-500/30 transition-all duration-300"
